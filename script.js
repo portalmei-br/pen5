@@ -1,3 +1,27 @@
+// Função para calcular o segundo sábado a partir da data atual
+function getSecondSaturday(today = new Date()) {
+    const date = new Date(today.getTime());
+    
+    // Encontrar o próximo sábado (dia da semana 6)
+    let daysUntilSaturday = (6 - date.getDay() + 7) % 7;
+    
+    // Se hoje é sábado, queremos o próximo sábado
+    if (daysUntilSaturday === 0) {
+        daysUntilSaturday = 7;
+    }
+    
+    // Primeiro sábado
+    let firstSaturday = new Date(date.getTime());
+    firstSaturday.setDate(date.getDate() + daysUntilSaturday);
+    
+    // Segundo sábado (7 dias depois do primeiro)
+    let secondSaturday = new Date(firstSaturday.getTime());
+    secondSaturday.setDate(firstSaturday.getDate() + 7);
+    
+    // Retornar no formato YYYY-MM-DD
+    return secondSaturday.toISOString().split('T')[0];
+}
+
 // Dados simulados de peneiras de futebol - VERSÃO SIMPLIFICADA
 const peneirasData = [
     {
@@ -115,6 +139,20 @@ const peneirasData = [
         inscricaoEncerrada: false
     }
 ];
+
+// Atualizar as datas das peneiras com o segundo sábado a partir da data atual
+const today = new Date();
+const secondSaturdayDate = getSecondSaturday(today);
+
+console.log(`Data atual: ${today.toDateString()}`);
+console.log(`Segundo sábado calculado: ${secondSaturdayDate}`);
+
+// Aplicar a data calculada a todas as peneiras
+peneirasData.forEach(peneira => {
+    peneira.data = secondSaturdayDate;
+});
+
+console.log('Datas das peneiras atualizadas para:', secondSaturdayDate);
 
 // Cache para armazenar endereços já consultados
 const enderecoCache = new Map();
@@ -980,3 +1018,24 @@ function setupScrollAnimations() {
     });
 }
 
+
+
+// Função para calcular o segundo sábado a partir da data atual
+function getSecondSaturday(today) {
+    const date = new Date(today.getTime());
+    let firstSaturday = new Date(date.getTime());
+    firstSaturday.setDate(firstSaturday.getDate() + (6 - firstSaturday.getDay() + 7) % 7);
+
+    let secondSaturday = new Date(firstSaturday.getTime());
+    secondSaturday.setDate(firstSaturday.getDate() + 7);
+
+    return secondSaturday.toISOString().split('T')[0];
+}
+
+// Atualizar as datas das peneiras com o segundo sábado a partir da data atual
+const today = new Date();
+const secondSaturdayDate = getSecondSaturday(today);
+
+peneirasData.forEach(peneira => {
+    peneira.data = secondSaturdayDate;
+});
