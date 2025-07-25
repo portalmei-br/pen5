@@ -313,7 +313,7 @@ body {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding-top: 100px;
+    padding-top: 150px;
 }
 
 .hero-text {
@@ -1857,7 +1857,7 @@ body {
     }
     
     .hero-content {
-        padding-top: 80px;
+        padding-top: 120px;
     }
     
     .search-box {
